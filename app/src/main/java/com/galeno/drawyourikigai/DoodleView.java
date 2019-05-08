@@ -82,33 +82,29 @@ public class DoodleView extends View {
         Canvas compositeCanvas = new Canvas(compositeBitmap);
         paintClear.setColor(Color.TRANSPARENT);
 
-        //paint.setColor(Color.argb(255,255,255,0));
-        paint.setColor(Color.argb(255, 152, 251, 152));
-        compositeCanvas.drawCircle(x / 2 , y / 2 - 150, 200, paint);
+        
+        
+        compositeCanvas.drawCircle(x / 2 , y / 2 - 150, 200, setColorPaint(paint));
 
         paint.setXfermode(new PorterDuffXfermode(mode));
-
-        //paint.setColor(Color.argb(255,0,255,255));
-        compositeCanvas.drawCircle(x / 2 , y / 2 + 150, 200, gerarPaint(paint));
+        
+        compositeCanvas.drawCircle(x / 2 , y / 2 + 150, 200, setColorPaint(paint));
 
         //paint.setColor(Color.argb(255,0,255,0));
-        compositeCanvas.drawCircle(x / 2 - 150, y / 2, 200, gerarPaint(paint));
+        compositeCanvas.drawCircle(x / 2 - 150, y / 2, 200, setColorPaint(paint));
 
         //paint.setColor(Color.argb(255,255,0,0));
-        compositeCanvas.drawCircle(x / 2 + 150, y / 2, 200, gerarPaint(paint));
+        compositeCanvas.drawCircle(x / 2 + 150, y / 2, 200, setColorPaint(paint));
 
         canvas.drawBitmap(compositeBitmap, 0, 0, null);
 
     }
 
-    public Paint gerarPaint(Paint paint){
-        // Paint paint = new Paint();
+    public Paint setColorPaint(Paint paint){
         Random random = new Random ();
         int r = random.nextInt(155)+100;
         int g = random.nextInt(155)+100;
         int b = random.nextInt(155)+100;
-        // paint.setStyle(Paint.Style.FILL);
-        // paint.setColor(Color.WHITE);
         paint.setColor(Color.argb(255, r, g, b));
         return paint;
     }
