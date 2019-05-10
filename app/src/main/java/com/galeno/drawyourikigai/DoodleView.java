@@ -30,7 +30,7 @@ public class DoodleView extends View {
     private final  Map <Integer, Point> previousPointMap = new HashMap<>(); //mapa que armazena o último ponto em cada path
 
     ArrayList<Path> paths = new ArrayList<Path>();
-
+    private  int choice;
     public DoodleView (Context context, AttributeSet attributes){
         super (context, attributes);
         paintScreen = new Paint();
@@ -63,10 +63,12 @@ public class DoodleView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+
         Paint paint          = new Paint();
         Paint paintClear     = new Paint();
         int x = getWidth();
         int y = getHeight();
+        Random gerador = new Random();
 
 
         PorterDuff.Mode mode = PorterDuff.Mode.OVERLAY;
@@ -82,12 +84,12 @@ public class DoodleView extends View {
         Canvas compositeCanvas = new Canvas(compositeBitmap);
         paintClear.setColor(Color.TRANSPARENT);
 
-        
-        
+
+
         compositeCanvas.drawCircle(x / 2 , y / 2 - 150, 200, setColorPaint(paint));
 
         paint.setXfermode(new PorterDuffXfermode(mode));
-        
+
         compositeCanvas.drawCircle(x / 2 , y / 2 + 150, 200, setColorPaint(paint));
 
         //paint.setColor(Color.argb(255,0,255,0));
@@ -100,6 +102,7 @@ public class DoodleView extends View {
 
     }
 
+
     public Paint setColorPaint(Paint paint){
         Random random = new Random ();
         int r = random.nextInt(155)+100;
@@ -108,6 +111,7 @@ public class DoodleView extends View {
         paint.setColor(Color.argb(255, r, g, b));
         return paint;
     }
+
 
 
 }
