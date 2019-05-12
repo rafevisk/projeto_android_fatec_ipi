@@ -33,9 +33,9 @@ public class ActivityPaintFragmentManual extends Fragment {
     //limiar que deve ser superado para considerar
     //que o usuário balançou o dispositivo
     private static final int ACCELERATION_THRESHOLD = 1000000;
-    //código que identifica o pedido de permissão
-    //para acesso ao armazenamento externo
-    private static final int SAVE_IMAGE_PERMISSION_REQUEST_CODE = 1;
+
+
+
 
     @Nullable
     @Override
@@ -65,18 +65,16 @@ public class ActivityPaintFragmentManual extends Fragment {
                         float x = event.values[0];
                         float y = event.values[1];
                         float z = event.values [2];
-                        //última aceleração se torna a atual
-                        //faz sentido depois da primeira vez
+
                         lastAcceleration = currentAcceleration;
                         //atualiza a aceleração atual
                         currentAcceleration = x * x + y * y + z * z;
-                        //qual a diferença entre a aceleração que já
-                        //existia e a nova detectada?
+                        //diferença entre a aceleração anterior e atual
                         acceleration = currentAcceleration *
                                 (currentAcceleration - lastAcceleration);
                         //passou do limiar?
                         if (acceleration > ACCELERATION_THRESHOLD){
-                            confirmErase();//faremos a seguir
+                            confirmErase();
                         }
                     }
 
@@ -146,76 +144,16 @@ public class ActivityPaintFragmentManual extends Fragment {
             case R.id.delete:
                 confirmErase();
                 return true;
-            case R.id.save:
-                //saveImage();//faremos em breve
-                return true;
-            case R.id.print:
-                //doodleView.printImage();//faremos em breve
-                return true;
-            case android.R.id.home:  //ID do seu botão (gerado automaticamente pelo android)
-                startActivity(new Intent(getContext(), MainActivity.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
-                getActivity().finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+            case android.R.id.home:
+                startActivity(new Intent(getContext(), MainActivity.class));
+                getActivity().finishAffinity();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void saveImage (){
-        if (getContext().
-                checkSelfPermission(
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
-                PackageManager.PERMISSION_GRANTED){
-            //permissão ainda não concedida
-            //usuário já disse não uma vez? se sim, explicar
-            if (shouldShowRequestPermissionRationale(
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-            )){
-                //constroi um (builder de) diálogo
-                AlertDialog.Builder builder =
-                        new AlertDialog.Builder(getActivity());
-                builder.setMessage(R.string.permission_explanation);
-                builder.setPositiveButton(
-                        android.R.string.ok,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog,
-                                                int which) {
-                                //pede a permissão
-                                requestPermissions(new String []{
 
-                                                Manifest.permission.WRITE_EXTERNAL_STORAGE},
 
-                                        SAVE_IMAGE_PERMISSION_REQUEST_CODE);
-                            }
-                        });
-                //mostra
-                builder.create().show();
-            }
-            else{
-                //usuário ainda não disse não, só pede a permissão
-                requestPermissions(new String[]{
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        SAVE_IMAGE_PERMISSION_REQUEST_CODE);
-            }
-        }
-        else{
-            //permissão já concedida, salva
-            //doodleView.saveImage();//faremos em breve
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull
-            String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
-            case SAVE_IMAGE_PERMISSION_REQUEST_CODE:
-                if (grantResults.length > 0
-                        && grantResults[0] ==
-                        PackageManager.PERMISSION_GRANTED){
-                    //doodleView.saveImage();//faremos já já
-                }
-        }
-    }
 
     public DoodleViewManual getDoodleView(){
         return this.doodleView;

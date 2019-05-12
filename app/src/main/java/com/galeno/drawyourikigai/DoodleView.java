@@ -28,7 +28,7 @@ public class DoodleView extends View {
     private final Paint paintLine; //Para fazer as linhas
     private final Map<Integer, Path> pathMap = new HashMap<>(); //mapa dos paths atualmente sendo desenhados
     private final  Map <Integer, Point> previousPointMap = new HashMap<>(); //mapa que armazena o último ponto em cada path
-
+    private final int radius = 220;
     ArrayList<Path> paths = new ArrayList<Path>();
     private  int choice;
     public DoodleView (Context context, AttributeSet attributes){
@@ -85,18 +85,23 @@ public class DoodleView extends View {
         paintClear.setColor(Color.TRANSPARENT);
 
 
-
-        compositeCanvas.drawCircle(x / 2 , y / 2 - 150, 200, setColorPaint(paint));
+        //Circle Top
+        //paint.setColor(Color.argb(255,255,255,224));
+        compositeCanvas.drawCircle(x / 2 , y / 2 - 140, radius, setColorPaint(paint));
 
         paint.setXfermode(new PorterDuffXfermode(mode));
 
-        compositeCanvas.drawCircle(x / 2 , y / 2 + 150, 200, setColorPaint(paint));
+        //Circle Botton
+        //paint.setColor(Color.argb(255,224,255,255));
+        compositeCanvas.drawCircle(x / 2 , y / 2 + 140, radius, setColorPaint(paint));
 
-        //paint.setColor(Color.argb(255,0,255,0));
-        compositeCanvas.drawCircle(x / 2 - 150, y / 2, 200, setColorPaint(paint));
+        //Circle Left
+        //paint.setColor(Color.argb(255,144,238,144));
+        compositeCanvas.drawCircle(x / 2 - 140, y / 2, radius, setColorPaint(paint));
 
-        //paint.setColor(Color.argb(255,255,0,0));
-        compositeCanvas.drawCircle(x / 2 + 150, y / 2, 200, setColorPaint(paint));
+        //Circle Right
+        //paint.setColor(Color.argb(255,255,160,122));
+        compositeCanvas.drawCircle(x / 2 + 140, y / 2, radius, setColorPaint(paint));
 
         canvas.drawBitmap(compositeBitmap, 0, 0, null);
 

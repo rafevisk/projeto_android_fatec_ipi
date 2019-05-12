@@ -14,7 +14,7 @@ import android.widget.ImageView;
 
 
 public class AboutActivity extends AppCompatActivity {
-    ImageView imageView;
+    //ImageView imageView;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
