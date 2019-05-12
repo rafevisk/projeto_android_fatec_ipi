@@ -3,6 +3,7 @@ package com.galeno.drawyourikigai;
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -19,6 +20,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import static android.support.v4.app.ActivityCompat.finishAffinity;
 
 public class ActivityPaintFragmentManual extends Fragment {
     private DoodleViewManual doodleView; //para desenhar e lidar com os eventos de toque na tela
@@ -149,6 +152,10 @@ public class ActivityPaintFragmentManual extends Fragment {
             case R.id.print:
                 //doodleView.printImage();//faremos em breve
                 return true;
+            case android.R.id.home:  //ID do seu botão (gerado automaticamente pelo android)
+                startActivity(new Intent(getContext(), MainActivity.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
+                getActivity().finishAffinity();  //Método para matar a activity e não deixa-lá indexada na pilhagem
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

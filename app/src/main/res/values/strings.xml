@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Draw Your Ikigai</string>
     <string name="msg_home">Welcome to Draw Your Ikigai</string>
-    <string name="bt_start">START</string>
+    <string name="bt_auto">Auto</string>
     <string name="bt_tip">Learn About Ikigai</string>
     <string name="about_ikigai">Ikigai (生き甲斐, pronounced [ikiɡai]) is a Japanese concept that means "a reason for being." The word "ikigai" is usually used to indicate the source of value in one\'s life or the things that make one\'s life worthwhile. The word translated to English roughly means "thing that you live for" or "the reason for which you wake up in the morning." Each individual\'s ikigai is personal to them and specific to their lives, values and beliefs. It reflects the inner self of an individual and expresses that faithfully, while simultaneously creating a mental state in which the individual feels at ease. Activities that allow one to feel ikigai are never forced on an individual; they are often spontaneous, and always undertaken willingly, giving the individual satisfaction and a sense of meaning to life</string>
     <string name="question">What\'s Ikigai?</string>
@@ -29,5 +29,7 @@
     <string name="permission_explanation">To save an image, the app requirespermission to write to external storage</string>
     <string name="title_color_dialog">Choose  Color</string>
     <string name="title_line_width_dialog">Choose Line Width</string>
+    <string name="title_manual">Manual drawing</string>
+    <string name="title_auto">Automatic drawing</string>
 
 </resources>
