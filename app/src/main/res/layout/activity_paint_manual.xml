@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/doodleFragmentManual"
-        android:name="com.galeno.drawyourikigai.ActivityPaintFragmentManual"
+        android:name="com.galeno.drawyourikigai.ManualDraw.ActivityPaintFragmentManual"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>

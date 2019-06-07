@@ -1,4 +1,4 @@
-package com.galeno.drawyourikigai;
+package com.galeno.drawyourikigai.ToolsFragments;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -11,6 +11,10 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.SeekBar;
+
+import com.galeno.drawyourikigai.ManualDraw.ActivityPaintFragmentManual;
+import com.galeno.drawyourikigai.ManualDraw.DoodleViewManual;
+import com.galeno.drawyourikigai.R;
 
 public class ColorDialogFragment extends DialogFragment {
     //seekbar para alpha

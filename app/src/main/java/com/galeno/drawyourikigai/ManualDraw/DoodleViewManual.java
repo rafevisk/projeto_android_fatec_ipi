@@ -1,4 +1,4 @@
-package com.galeno.drawyourikigai;
+package com.galeno.drawyourikigai.ManualDraw;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,6 +14,8 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
+
+import com.galeno.drawyourikigai.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

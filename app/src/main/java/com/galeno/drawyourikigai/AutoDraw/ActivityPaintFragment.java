@@ -1,15 +1,14 @@
-package com.galeno.drawyourikigai;
+package com.galeno.drawyourikigai.AutoDraw;
 
-import android.content.Context;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.galeno.drawyourikigai.R;
 
 public class ActivityPaintFragment extends Fragment {
     private DoodleView doodleView; //para desenhar e lidar com os eventos de toque na tela

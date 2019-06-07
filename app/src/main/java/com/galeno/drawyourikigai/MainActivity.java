@@ -1,11 +1,14 @@
 package com.galeno.drawyourikigai;
 
 import android.content.Intent;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+
+import com.galeno.drawyourikigai.AutoDraw.ActivityPaintFragment;
+import com.galeno.drawyourikigai.AutoDraw.PaintActivity;
+import com.galeno.drawyourikigai.InfoIkigai.AboutActivity;
+import com.galeno.drawyourikigai.ManualDraw.PaintManualActivity;
 
 public class MainActivity extends AppCompatActivity {
     Button btTip;
@@ -26,8 +29,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btStart.setOnClickListener((v) -> {
-            Intent it = new Intent(this, PaintActivity.class);
-            startActivity(it);
+            //Intent it = new Intent(this, PaintActivity.class);
+            //startActivity(it);
+            Intent intent = new Intent(this, AutomaticDraw.class);
+            startActivity(intent);
         });
 
         btStartManual.setOnClickListener((v) -> {

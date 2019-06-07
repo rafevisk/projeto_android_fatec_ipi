@@ -1,4 +1,4 @@
-package com.galeno.drawyourikigai;
+package com.galeno.drawyourikigai.AutoDraw;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,6 +9,7 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.view.MotionEvent;
 import android.graphics.Region;
 import android.util.AttributeSet;
 import android.view.View;
@@ -20,41 +21,34 @@ import java.util.Map;
 import java.util.Random;
 
 public class DoodleView extends View {
-    //limiar para decidir se o usuário moveu o dedo o suficiente
-    private static final float TOUCH_TOLERANCE = 10;
-    private Bitmap bitmap; //Tela inicial
-    private Canvas bitmapCanvas; //Para desenhar no bitmap
-    private final Paint paintScreen; //Para desenhar na tela
-    private final Paint paintLine; //Para fazer as linhas
-    private final Map<Integer, Path> pathMap = new HashMap<>(); //mapa dos paths atualmente sendo desenhados
-    private final  Map <Integer, Point> previousPointMap = new HashMap<>(); //mapa que armazena o último ponto em cada path
+
+    private Bitmap bitmap;
+    private Canvas bitmapCanvas;
+    private final Paint paintScreen;
+    private final Paint paintLine;
     private final int radius = 220;
-    ArrayList<Path> paths = new ArrayList<Path>();
-    private  int choice;
+    private ArrayList<Point> posicoes = new ArrayList<>();
+
     public DoodleView (Context context, AttributeSet attributes){
         super (context, attributes);
         paintScreen = new Paint();
         paintLine = new Paint();
-        paintLine.setAntiAlias(true);  //suavizar os limites das linhas
-        paintLine.setColor(Color.BLACK); //cor
-        paintLine.setStyle(Paint.Style.STROKE); //linha sólida
-        paintLine.setStrokeWidth(5); //espessura
-        paintLine.setStrokeCap(Paint.Cap.ROUND); //terminais das linhas arredondados
-
+        paintLine.setAntiAlias(true);
+        paintLine.setColor(Color.BLACK);
+        paintLine.setStyle(Paint.Style.STROKE);
+        paintLine.setStrokeWidth(5);
+        paintLine.setStrokeCap(Paint.Cap.ROUND);
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
-        //o canvas desenha no bitmap
         bitmapCanvas = new Canvas (bitmap);
-        bitmap.eraseColor(Color.WHITE);//apaga usando branco
+        bitmap.eraseColor(Color.WHITE);
     }
 
     public void setDrawingColor (int color){
-        //paintLine.setColor(Color.WHITE);
         paintScreen.setColor(color);
-
     }
 
     public int getDrawingColor(){
@@ -64,12 +58,12 @@ public class DoodleView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
 
+        posicoes = gerarPosicoes();
+
         Paint paint          = new Paint();
         Paint paintClear     = new Paint();
         int x = getWidth();
         int y = getHeight();
-        Random gerador = new Random();
-
 
         PorterDuff.Mode mode = PorterDuff.Mode.OVERLAY;
 
@@ -86,27 +80,22 @@ public class DoodleView extends View {
 
 
         //Circle Top
-        //paint.setColor(Color.argb(255,255,255,224));
-        compositeCanvas.drawCircle(x / 2 , y / 2 - 140, radius, setColorPaint(paint));
+        compositeCanvas.drawCircle(posicoes.get(0).x, posicoes.get(0).y, radius, setColorPaint(paint));
 
         paint.setXfermode(new PorterDuffXfermode(mode));
 
         //Circle Botton
-        //paint.setColor(Color.argb(255,224,255,255));
-        compositeCanvas.drawCircle(x / 2 , y / 2 + 140, radius, setColorPaint(paint));
+        compositeCanvas.drawCircle(posicoes.get(2).x, posicoes.get(2).y, radius, setColorPaint(paint));
 
         //Circle Left
-        //paint.setColor(Color.argb(255,144,238,144));
-        compositeCanvas.drawCircle(x / 2 - 140, y / 2, radius, setColorPaint(paint));
+        compositeCanvas.drawCircle(posicoes.get(1).x, posicoes.get(1).y, radius, setColorPaint(paint));
 
         //Circle Right
-        //paint.setColor(Color.argb(255,255,160,122));
-        compositeCanvas.drawCircle(x / 2 + 140, y / 2, radius, setColorPaint(paint));
+        compositeCanvas.drawCircle(posicoes.get(3).x, posicoes.get(3).y, radius, setColorPaint(paint));
 
         canvas.drawBitmap(compositeBitmap, 0, 0, null);
 
     }
-
 
     public Paint setColorPaint(Paint paint){
         Random random = new Random ();
@@ -116,6 +105,25 @@ public class DoodleView extends View {
         paint.setColor(Color.argb(255, r, g, b));
         return paint;
     }
+    public ArrayList<Point> gerarPosicoes(){
+        ArrayList<Point> Ponteiros = new ArrayList<>();
+        int x = getWidth();
+        int y = getWidth();
+        Point posição1 = new Point(x / 2 , y / 2 - 140);
+        Point posição2 = new Point(x / 2 , y / 2 + 140);
+        Point posição3 = new Point(x / 2 - 140, y / 2);
+        Point posição4 = new Point(x / 2 + 140, y / 2);
+        Ponteiros.add(posição1);
+        Ponteiros.add(posição2);
+        Ponteiros.add(posição3);
+        Ponteiros.add(posição4);
+
+        return Ponteiros;
+    }
+
+
+
+
 
 
 

@@ -1,10 +1,7 @@
-package com.galeno.drawyourikigai;
+package com.galeno.drawyourikigai.ManualDraw;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -13,7 +10,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,7 +17,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import static android.support.v4.app.ActivityCompat.finishAffinity;
+import com.galeno.drawyourikigai.MainActivity;
+import com.galeno.drawyourikigai.ManualDraw.DoodleViewManual;
+import com.galeno.drawyourikigai.R;
+import com.galeno.drawyourikigai.ToolsFragments.ColorDialogFragment;
+import com.galeno.drawyourikigai.ToolsFragments.EraseImageDialogFragment;
+import com.galeno.drawyourikigai.ToolsFragments.LineWidthDialogFragment;
 
 public class ActivityPaintFragmentManual extends Fragment {
     private DoodleViewManual doodleView; //para desenhar e lidar com os eventos de toque na tela

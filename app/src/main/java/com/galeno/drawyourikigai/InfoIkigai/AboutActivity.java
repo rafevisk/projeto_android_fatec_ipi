@@ -1,4 +1,4 @@
-package com.galeno.drawyourikigai;
+package com.galeno.drawyourikigai.InfoIkigai;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.galeno.drawyourikigai.MainActivity;
+import com.galeno.drawyourikigai.R;
 
 //import com.github.chrisbanes.photoview.PhotoView;
 

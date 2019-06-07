@@ -21,9 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AboutActivity"/>
-        <activity android:name=".PaintActivity"/>
-        <activity android:name=".PaintManualActivity"/>
+        <activity android:name=".InfoIkigai.AboutActivity"/>
+        <activity android:name=".AutoDraw.PaintActivity"/>
+        <activity android:name=".ManualDraw.PaintManualActivity"/>
+        <activity android:name=".AutomaticDraw"/>
 
     </application>
 
