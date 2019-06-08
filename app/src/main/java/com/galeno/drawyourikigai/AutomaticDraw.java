@@ -24,6 +24,9 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Random;
 
 public class AutomaticDraw extends AppCompatActivity {
@@ -45,69 +48,13 @@ public class AutomaticDraw extends AppCompatActivity {
     String profession = "";
     String vocation = "";
 
-    Path path = new Path();
-
     Bitmap tempBmp = Bitmap.createBitmap(1, 1, Bitmap.Config.RGB_565);
     Canvas c = new Canvas();
-    Canvas aaa = new Canvas();
     Paint paint = new Paint();
-    Paint p = new Paint();
-    String texto;
+
     boolean redesenhar = false;
 
     EditText input;
-    Button shoBtn;
-
-
-    public void inpurDialog(final int circulo) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        builder.setMessage("What do you want to do ?");
-
-        builder.setPositiveButton("Write", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-
-                if (circulo == 1) {
-                    white("Whats you Love ?", 1);
-                }
-                if (circulo == 2) {
-                    white("Whats you are Gooad At ?", 2);
-                }
-                if (circulo == 3) {
-                    white("Whats you World Need ?", 3);
-                }
-                if (circulo == 4) {
-                    white("Whats you Can Be Paid For ?", 4);
-                }
-
-
-            }
-
-        });
-
-        builder.setNeutralButton("Change color", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-
-                //openColorPicker();
-
-            }
-
-        });
-
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-                dialogInterface.dismiss();
-
-            }
-        });
-
-        AlertDialog ad = builder.create();
-        ad.show();
-    }
-
 
     public void white(final String pergunta, final int circulo) {
 
@@ -116,59 +63,68 @@ public class AutomaticDraw extends AppCompatActivity {
 
         input = new EditText(this);
         builder.setView(input);
-        //Salvar aqui no firebase
+
         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
                 String txt = input.getText().toString();
-
-
-                if (circulo == 1) {
-                    q1 = txt;
-                    // Write a message to the database
-                    FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference myRef = database.getReference("message");
-
-                    myRef.setValue("Hello, World!");
-                }
-                if (circulo == 2) {
-                    q2 = txt;
-                }
-                if (circulo == 3) {
-                    q3 = txt;
-                }
-                if (circulo == 4) {
-                    q4 = txt;
-                }
-                if (circulo == 5) {
-                    passion = txt;
-                }
-                if (circulo == 6) {
-                    mission = txt;
-                }
-                if (circulo == 7) {
-                    profession = txt;
-                }
-                if (circulo == 8) {
-                    vocation = txt;
+                if (!txt.isEmpty()) {
+                    if (circulo == 1) {
+                        q1 = txt;
+                        addData("love",q1);
+                    }
+                    if (circulo == 2) {
+                        q2 = txt;
+                        addData("good_at",q2);
+                    }
+                    if (circulo == 3) {
+                        q3 = txt;
+                        addData("need",q3);
+                    }
+                    if (circulo == 4) {
+                        q4 = txt;
+                        addData("paid_for",q4);
+                    }
+                    if (circulo == 5) {
+                        passion = txt;
+                        addData("passion",passion);
+                    }
+                    if (circulo == 6) {
+                        mission = txt;
+                        addData("mission",mission);
+                    }
+                    if (circulo == 7) {
+                        profession = txt;
+                        addData("profession",profession);
+                    }
+                    if (circulo == 8) {
+                        vocation = txt;
+                        addData("vocation",vocation);
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please, make sure you've write something", Toast.LENGTH_SHORT).show();
                 }
 
             }
 
-        });
-
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
                 dialogInterface.dismiss();
-
             }
         });
 
         AlertDialog ad = builder.create();
         ad.show();
     }
+    //Save data on FireBase
+    public void addData(String nameCircle, String txt){
+        // Write a message to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference();
 
+        myRef.child(nameCircle).push().setValue(txt);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -185,10 +141,6 @@ public class AutomaticDraw extends AppCompatActivity {
 
             void update(Canvas canvas) {
 
-                //canvas.drawPaint(paint);
-
-                //clear previous drawings
-
                 c.drawColor(Color.TRANSPARENT, PorterDuff.Mode.OVERLAY);
 
                 float w = canvas.getWidth();
@@ -200,7 +152,6 @@ public class AutomaticDraw extends AppCompatActivity {
                 float ty = (float) (r * Math.sin(15 * Math.PI / 180));
                 float expand = 1.5f;
                 paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DARKEN));
-
 
                 //Escrevendo respostas
                 paint.setColor(Color.argb(255, 0, 0, 0));
@@ -216,7 +167,6 @@ public class AutomaticDraw extends AppCompatActivity {
                 c.drawText("" + profession, cx - tx - 70, cy + tx + 20, paint);
                 c.drawText("" + vocation, cx + tx - 60, cy + tx + 20, paint);
 
-
                 //atualizando
                 postInvalidate();
 
@@ -228,8 +178,6 @@ public class AutomaticDraw extends AppCompatActivity {
                 tempBmp.recycle();
                 tempBmp = Bitmap.createBitmap(canvas.getWidth(), canvas.getHeight(), Bitmap.Config.ARGB_8888);//ARGB_8888
                 c.setBitmap(tempBmp);
-
-                //clear previous drawings
 
                 c.drawColor(Color.TRANSPARENT, PorterDuff.Mode.OVERLAY);
 
@@ -243,18 +191,14 @@ public class AutomaticDraw extends AppCompatActivity {
                 float expand = 1.5f;
 
                 paint.setAntiAlias(true);
-                //paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.ADD));
 
                 PorterDuff.Mode mode = PorterDuff.Mode.OVERLAY;
                 paint.setXfermode(new PorterDuffXfermode(mode));
 
                 Resources res = getResources();
                 Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.ic_launcher_background);
-                // c.drawBitmap(bitmap, 30, 30, paint);
-
 
                 //1
-
                 paint.setColor(colorc1);//t
                 c.drawCircle(cx, cy - r - 10, expand * r, paint);
 
@@ -272,7 +216,6 @@ public class AutomaticDraw extends AppCompatActivity {
 
                 canvas.drawBitmap(tempBmp, 0, 0, null);
 
-
                 paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DARKEN));
 
                 paint.setColor(Color.BLACK);
@@ -283,7 +226,6 @@ public class AutomaticDraw extends AppCompatActivity {
                 c.drawText("Whats you Love ", cx - tx + 40, cy - tx * 2 - 20, paint);
                 c.drawText(" LOVE ", cx - tx + 110, cy - tx * 2 + 30, paint);
 
-
                 c.drawText("what you are", cx / 14, cy + ty - 40, paint);
                 c.drawText(" GOOD AT", cx / 14, cy + ty - 10, paint);
 
@@ -292,7 +234,6 @@ public class AutomaticDraw extends AppCompatActivity {
 
                 c.drawText("Whats you can be", cx - tx + 25, cy + ty * 7, paint);
                 c.drawText(" PAID FOR ", cx - tx + 75, cy + ty * 8, paint);
-
 
                 paint.setTextSize(24);
                 c.drawText("PASSION ", cx - tx - 30, cy - tx + 20, paint);
@@ -325,16 +266,13 @@ public class AutomaticDraw extends AppCompatActivity {
                 boolean c4 = false;
                 boolean cum = false;
 
-
                 Canvas canvas = new Canvas();
 
                 final float x = event.getX();
                 final float y = event.getY();
 
                 switch (event.getAction()) {
-
                     case MotionEvent.ACTION_DOWN:
-
                         // Capturando o toque do circulo 1
                         if (y > cy - r - 10 - expand * r && y < cy - r - 10 + expand * r && x > cx - expand * r && x < cx + expand * r) {
                             cum = true;
@@ -348,12 +286,14 @@ public class AutomaticDraw extends AppCompatActivity {
                         } else {
                             c2 = false;
                         }
+
                         // Capturando o toque do circulo 3
                         if (y > cy + ty - 20 - expand * r && y < cy + ty - 20 + expand * r && x > cx + tx - expand * r && x < cx + tx + expand * r) {
                             c3 = true;
                         } else {
                             c3 = false;
                         }
+
                         // Capturando o toque do circulo 4
                         if (y > cy + ty * 4 - expand * r && y < cy + ty * 4 + expand * r && x > cx - expand * r && x < cx + expand * r) {
                             c4 = true;
@@ -365,44 +305,30 @@ public class AutomaticDraw extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Ikigai", Toast.LENGTH_LONG).show();
                         }
 
-
                         if (cum == true && c2 == false && c3 == false && c4 == false) {
                             circulodavez = 1;
-
-                            inpurDialog(1);
+                            white("Whats you Love ?", 1);
                         }
-
                         if (c2 == true && cum == false && c3 == false && c4 == false) {
                             circulodavez = 2;
-
-                            inpurDialog(2);
+                            white("Whats you are Good At ?", 2);
                         }
-
-
                         if (c3 == true && c2 == false && cum == false && c4 == false) {
                             circulodavez = 3;
-
-                            inpurDialog(3);
-
+                            white("Whats you World Need ?", 3);
                         }
 
                         if (c4 == true && c2 == false && c3 == false && cum == false) {
                             circulodavez = 4;
-
-                            inpurDialog(4);
-
+                            white("Whats you Can Be Paid For ?", 4);
                         }
-
 
                         if (cum == true && c2 == true && c3 == false && c4 == false) {
                             white("Your Passion", 5);
-
                         }
-
 
                         if (cum == true && c2 == false && c3 == true && c4 == false) {
                             white("Your Mission", 6);
-
                         }
 
                         if (c1 == false && c2 == true && c3 == false && c4 == true) {
@@ -413,11 +339,9 @@ public class AutomaticDraw extends AppCompatActivity {
                             white("Your Vocation", 8);
                         }
 
-
                         update(c);
                         draw(c);
                         redesenhar = true;
-
 
                         break;
                     default:
@@ -436,8 +360,4 @@ public class AutomaticDraw extends AppCompatActivity {
         int color = Color.argb(255, r, g, b);
         return color;
     }
-
-
-
-
 }
