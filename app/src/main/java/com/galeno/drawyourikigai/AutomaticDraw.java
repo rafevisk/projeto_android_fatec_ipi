@@ -20,6 +20,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Random;
 
 public class AutomaticDraw extends AppCompatActivity {
@@ -112,8 +116,8 @@ public class AutomaticDraw extends AppCompatActivity {
 
         input = new EditText(this);
         builder.setView(input);
-
-        builder.setPositiveButton("Write", new DialogInterface.OnClickListener() {
+        //Salvar aqui no firebase
+        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
                 String txt = input.getText().toString();
@@ -121,6 +125,11 @@ public class AutomaticDraw extends AppCompatActivity {
 
                 if (circulo == 1) {
                     q1 = txt;
+                    // Write a message to the database
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = database.getReference("message");
+
+                    myRef.setValue("Hello, World!");
                 }
                 if (circulo == 2) {
                     q2 = txt;
@@ -165,6 +174,8 @@ public class AutomaticDraw extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FirebaseApp.initializeApp(this);
 
         class VennView extends View {
             public VennView(Context context) {

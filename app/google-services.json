@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1052490470768",
+    "firebase_url": "https://ikigai-dd46d.firebaseio.com",
+    "project_id": "ikigai-dd46d",
+    "storage_bucket": "ikigai-dd46d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1052490470768:android:2b66c3f350b9801e",
+        "android_client_info": {
+          "package_name": "com.galeno.drawyourikigai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1052490470768-fd0mg9ruhu6b1a1k5hbap0f9k3oq8cq4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiwMIvVa3Fuj5Kin4KjxVMkmOIBI5c6uE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1052490470768-fd0mg9ruhu6b1a1k5hbap0f9k3oq8cq4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
