@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Draw Your Ikigai</string>
+    <string name="app_name">Make Your Ikigai</string>
     <string name="msg_home" translatable="false">Welcome to Draw Your Ikigai</string>
     <string name="bt_auto">Auto</string>
     <string name="bt_tip">Learn About Ikigai</string>
@@ -47,4 +47,5 @@
     <string name="vocation">VOCATION</string>
     <string name="question_love">What you love ?</string>
     <string name="question_good">What you are good at ?</string>
+    <string name="your">Your</string>
 </resources>

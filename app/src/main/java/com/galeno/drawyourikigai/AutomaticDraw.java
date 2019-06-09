@@ -164,29 +164,20 @@ public class AutomaticDraw extends AppCompatActivity {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     String value = child.getValue(String.class);
                     dados.add(value);
-                    //Log.d(TAG, "Value is: " + value);
                 }
+                //Tira as repetiçoes
                 Set<String> dadosSemRepeticoes = new HashSet<>(dados);
-                //Iterator<String> iteradorDadosSemRepeticoes = dadosSemRepeticoes.iterator();
                 dados.clear();
                 for ( String item : dadosSemRepeticoes){
                     dados.add(item);
                 }
-/*                while (iteradorDadosSemRepeticoes.hasNext()) {
-                    dados.add(iteradorDadosSemRepeticoes.next());
-                    Log.d(TAG, "Value is: " + iteradorDadosSemRepeticoes.next());
-                }*/
-                //return dados;
             }
-
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-
-
         return dados;
     }
 
@@ -197,9 +188,6 @@ public class AutomaticDraw extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //Inicia firebase
         FirebaseApp.initializeApp(this);
-
-
-
 
         class VennView extends View {
             public VennView(Context context) {
@@ -218,13 +206,13 @@ public class AutomaticDraw extends AppCompatActivity {
                 float r = w / 5;
                 float tx = (float) (r * Math.cos(15 * Math.PI / 180));
                 float ty = (float) (r * Math.sin(15 * Math.PI / 180));
-                float expand = 1.5f;
+                //float expand = 1.5f;
                 paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DARKEN));
 
                 //Escrevendo respostas
                 paint.setColor(Color.argb(255, 0, 0, 0));
-                paint.setTextSize(26);
-                c.drawText("" + q1, cx - tx + 25, 340, paint);
+                paint.setTextSize(28);
+                c.drawText("" + q1, cx - tx + 85, cy - tx * 2 + 55, paint);
                 c.drawText("" + q2, cx / 14, cy + ty + 30, paint);
                 c.drawText("" + q3, cx + tx + 84, cy + ty + 30, paint);
                 c.drawText("" + q4, cx - tx + 75, cy + ty * 8 + 30, paint);
@@ -399,24 +387,24 @@ public class AutomaticDraw extends AppCompatActivity {
 
                             pas = listAllData("passion");
 
-                            white("Your " + getString(R.string.passion), 5,pas);
+                            white(getString(R.string.your) + " " + getString(R.string.passion), 5,pas);
                         }
 
                         if (cum == true && c2 == false && c3 == true && c4 == false) {
                             mis = listAllData("mission");
 
-                            white("Your " + getString(R.string.mission), 6,mis);
+                            white(getString(R.string.your) + " " + getString(R.string.mission), 6,mis);
                         }
 
                         if (c1 == false && c2 == true && c3 == false && c4 == true) {
                             prof = listAllData("profession");
 
-                            white("Your " + getString(R.string.profession), 7,prof);
+                            white(getString(R.string.your) + " " + getString(R.string.profession), 7,prof);
                         }
 
                         if (c1 == false && c2 == false && c3 == true && c4 == true) {
                             voca = listAllData("vocation");
-                            white("Your " + getString(R.string.vocation), 8,voca);
+                            white(getString(R.string.your) + " " + getString(R.string.vocation), 8,voca);
                         }
 
                         update(c);

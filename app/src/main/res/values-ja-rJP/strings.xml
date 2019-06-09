@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">あなたのいきがいを作ろう</string>
+    <string name="bt_auto">Automático</string>
+    <string name="bt_tip">いきがいについて学ぶ</string>
+    <string name="about_ikigai">いきがいは、生きる理由を意味する日本の概念です。 いきがいという言葉は、通常、人生における価値の源泉や人生を価値あるものにするものを表すのに使われます。 おおまかに英語に翻訳されているということは、あなたが朝起きるという理由で生きているということです。 各個人のいきがいは個人的なものであり、彼らの生活、価値観、信条に固有のものです。 それは個人の内なる自己を反映し、それを忠実に表現しながら、同時に個人が安心しているような精神状態を作り出します。 いきがいを感じさせる活動は、個人に強いられることはありません。 彼らはしばしば自発的であり、そして常に喜んで引き受けて、個人の満足と人生に意味の感覚を与えます</string>
+    <string name="question">いきがいとは何ですか？</string>
+    <string name="bt_start_m">描く</string>
+    <string name="button_erase">画像を削除</string>
+    <string name="button_set_color">色を選ぶ</string>
+    <string name="button_set_line_width">線幅を設定線幅を設定</string>
+    <string name="line_imageview_description">線の太さが表示されます</string>
+    <string name="label_red">赤</string>
+    <string name="label_green">グリーン</string>
+    <string name="label_blue">青</string>
+    <string name="menuitem_color">色</string>
+    <string name="menuitem_delete">図面を削除</string>
+    <string name="menuitem_line_width">線幅</string>
+    <string name="message_erase">図面を削除しますか？</string>
+    <string name="title_color_dialog">色を選択</string>
+    <string name="title_line_width_dialog">線幅を選択</string>
+    <string name="title_manual">いきがいを描く</string>
+    <string name="title_auto">絵</string>
+    <string name="save">保存する</string>
+    <string name="messagem_warning">必ず何か書いてください</string>
+    <string name="cancel">キャンセル</string>
+    <string name="t_love">あなたが好きなもの</string>
+    <string name="love">愛してる</string>
+    <string name="t_good">あなたは何ですか？</string>
+    <string name="good">良い</string>
+    <string name="t_need">なんて世界</string>
+    <string name="need">正確な</string>
+    <string name="t_paid">あなたができることのために</string>
+    <string name="paid">お支払い</string>
+    <string name="passion">情熱</string>
+    <string name="mission">ミッション</string>
+    <string name="profession">職業</string>
+    <string name="vocation">職業</string>
+    <string name="question_love">あなたは何が好きですか？</string>
+    <string name="question_good">あなたは何が得意ですか？</string>
+    <string name="your">あなたの</string>
+</resources>

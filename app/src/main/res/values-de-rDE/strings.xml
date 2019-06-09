@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Make Your Ikigai</string>
+    <string name="your">Ihr</string>
+    <string name="question_good">Was kannst du gut?</string>
+    <string name="question_love">Was liebst du</string>
+    <string name="vocation">BERUFUNG</string>
+    <string name="profession">BERUF</string>
+    <string name="mission">MISSION</string>
+    <string name="passion">LEIDENSCHAFT</string>
+    <string name="paid">ZAHLUNG</string>
+    <string name="t_paid">Für was du sein kannst</string>
+    <string name="need">BEDÜRFNISSE</string>
+    <string name="t_need">Was zur Welt</string>
+    <string name="good">Gut</string>
+    <string name="t_good">Was bist du</string>
+    <string name="love">liebst</string>
+    <string name="t_love">Was du liebst</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="messagem_warning">Bitte stellen Sie sicher, dass Sie etwas schreiben</string>
+    <string name="save">Speichern</string>
+    <string name="title_auto">Zeichnen</string>
+    <string name="title_manual">Ikigai zeichnen</string>
+    <string name="title_line_width_dialog">Wählen Sie die Linienbreite</string>
+    <string name="title_color_dialog">Farbe auswählen</string>
+    <string name="message_erase">Zeichnung löschen?</string>
+    <string name="menuitem_line_width">Linienbreite</string>
+    <string name="menuitem_delete">Zeichnung löschen</string>
+    <string name="menuitem_color">Farbe</string>
+    <string name="label_blue">Blau</string>
+    <string name="label_green">Grün</string>
+    <string name="label_red">Rot</string>
+    <string name="line_imageview_description">Dies zeigt die Linienstärke an</string>
+    <string name="button_set_line_width">Linienbreite einstellen</string>
+    <string name="button_set_color">Farbe auswählen</string>
+    <string name="button_erase">Bild löschen</string>
+    <string name="bt_start_m">Zeichnen</string>
+    <string name="question">Was ist Ikigai?</string>
+    <string name="bt_tip">Ikigai kennenlernen</string>
+    <string name="about_ikigai">Ikigai (生 生 甲 斐, ausgesprochen [ikiɡai]) ist ein japanischer Begriff, der einen Grund zum Sein bedeutet. Das Wort ikigai wird normalerweise verwendet, um die Quelle des Wertes im eigenen Leben oder die Dinge anzuzeigen, die das eigene Leben lohnenswert machen. Das ins Englische übersetzte Wort bedeutet ungefähr, dass Sie aus dem Grund leben, aus dem Sie morgens aufwachen. Das Ikigai eines jeden Menschen ist für ihn persönlich und spezifisch für sein Leben, seine Werte und Überzeugungen. Es reflektiert das innere Selbst eines Individuums und drückt dies getreu aus, während es gleichzeitig einen mentalen Zustand erzeugt, in dem sich das Individuum wohl fühlt. Aktivitäten, die es einem ermöglichen, sich wie ein Ikigai zu fühlen, werden keinem Menschen aufgezwungen. Sie sind oft spontan und werden immer bereitwillig unternommen, um dem Leben individuelle Befriedigung und Sinn zu verleihen</string>
+    <string name="bt_auto">Automatisch</string>
+</resources>
