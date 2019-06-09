@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Draw Your Ikigai</string>
+    <string name="bt_auto">Automático</string>
+    <string name="bt_tip">Aprender sobre Ikigai</string>
+    <string name="about_ikigai">Ikigai (em japonês: 生き甲斐 ) é uma palavra japonesa que significa \"razão de viver\", \"objeto de prazer para viver\" ou \"força motriz para viver\".[1] Existem várias teorias sobre essa etimologia. De acordo com os japoneses, todos têm um ikigai. E descobrir qual é o seu requer uma profunda e, muitas vezes, extensa busca de si mesmo. Porém, essa busca é extremamente importante porque, somente a partir dela, é possível trazer satisfação e significado para sua vida.  Portanto, Ikigai é um estilo de vida que traga Harmonia, Longevidade e a Satisfação Plena nas diferentes áreas da vida, permitindo assim alcançar a Razão de Ser ou Propósito para a sua existência. A busca pelo sentido na vida está (na sociedade moderna) profundamente ligada ao entendimento de Quem Somos (nossas crenças, relacionamentos, cultura, formação, etc), mas também em boa parte sobre O Que Fazemos (profissão, vocação, trabalho, lazer, etc). Assim, em muitos casos nossa percepção sobre nossa Razão de Ser dificilmente estará completa sem encontrarmos consonância entre o que somos e o que fazemos. Em outras palavras, em um mundo no qual nossa identidade apresenta uma profunda correlação entre o ser humano e seu trabalho (talvez um vício da sociedade industrial), são poucas as pessoas que se sentem felizes e com seu propósito realizado sem ter compreendido aspectos pessoais e profissionais.  Por isso mesmo, no círculo Ikigai observamos a clara correlação entre estes aspectos, ajudando a compreender e detalhar cada um deles. Não se trata de definir o ser humano por meio de seu trabalho (algo que poderia soar como alienante e utilitarista). Pelo contrário, a proposta da filosofia Ikigai é a “desalienação” do trabalho enquanto obrigação social, para uma visão mais humana, na qual podemos encontrar sentido e satisfação naquilo que realizamos.</string>
+    <string name="question">O que é Ikigai?</string>
+    <string name="bt_start_m">Desenhar</string>
+    <string name="button_erase">Apagar imagem</string>
+    <string name="button_set_color">Selecionar cor</string>
+    <string name="button_set_line_width">Definir Largura da Linha</string>
+    <string name="line_imageview_description">Isso exibe a espessura da linha</string>
+    <string name="label_red">Vermelho</string>
+    <string name="label_green">Verde</string>
+    <string name="label_blue">Azul</string>
+    <string name="menuitem_color">Cor</string>
+    <string name="menuitem_delete">Apagar desenho</string>
+    <string name="menuitem_line_width">Largura da linha</string>
+    <string name="message_erase">Apagar desenho ?</string>
+    <string name="title_color_dialog">Selecione a cor</string>
+    <string name="title_line_width_dialog">Escolha a largura da linha</string>
+    <string name="title_manual">Desenhar Ikigai</string>
+    <string name="title_auto">"Desenho "</string>
+    <string name="save">Salvar</string>
+    <string name="messagem_warning">Por favor, certifique-se de escrever algo</string>
+    <string name="cancel">Cancelar</string>
+    <string name="t_love">O que você ama</string>
+    <string name="love">AMA</string>
+    <string name="t_good">Em que você é</string>
+    <string name="good">BOM</string>
+    <string name="t_need">O que o mundo</string>
+    <string name="need">PRECISA</string>
+    <string name="t_paid">Pelo que você pode ser</string>
+    <string name="paid">PAGO</string>
+    <string name="passion">PAIXÃO</string>
+    <string name="mission">MISSÃO</string>
+    <string name="profession">PROFISSÃO</string>
+    <string name="vocation">VOCAÇÃO</string>
+    <string name="question_love">O que você ama ?</string>
+    <string name="question_good">Em que você é bom ?</string>
+</resources>
