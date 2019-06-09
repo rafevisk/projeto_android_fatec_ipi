@@ -28,7 +28,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Random;
+import java.util.Set;
 
 public class AutomaticDraw extends AppCompatActivity {
     final String TAG = "Teste";
@@ -50,6 +53,15 @@ public class AutomaticDraw extends AppCompatActivity {
     String vocation = "";
 
     ArrayList<String> love;
+    ArrayList<String> good;
+    ArrayList<String> need;
+    ArrayList<String> paid;
+
+    ArrayList<String> pas;
+    ArrayList<String> mis;
+    ArrayList<String> prof;
+    ArrayList<String> voca;
+
 
     Bitmap tempBmp = Bitmap.createBitmap(1, 1, Bitmap.Config.RGB_565);
     Canvas c = new Canvas();
@@ -60,15 +72,16 @@ public class AutomaticDraw extends AppCompatActivity {
 
     //EditText input;
 
-    public void white(final String pergunta, final int circulo) {
+    public void white(final String pergunta, final int circulo, ArrayList base) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(pergunta);
 
+
+
         input = new AutoCompleteTextView(this);
         builder.setView(input);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (this, android.R.layout.select_dialog_item, love);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String> (this, android.R.layout.select_dialog_item, base);
         input.setThreshold(1); //will start working from first character
         input.setAdapter(adapter);
 
@@ -80,7 +93,6 @@ public class AutomaticDraw extends AppCompatActivity {
                     if (circulo == 1) {
                         q1 = txt;
                         addData("love",q1);
-                        listAllData("love");
                     }
                     if (circulo == 2) {
                         q2 = txt;
@@ -143,6 +155,7 @@ public class AutomaticDraw extends AppCompatActivity {
         DatabaseReference myRef = database.getReference(nameCircle);
 
         ArrayList<String> dados = new ArrayList<String>();
+
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -153,6 +166,17 @@ public class AutomaticDraw extends AppCompatActivity {
                     dados.add(value);
                     //Log.d(TAG, "Value is: " + value);
                 }
+                Set<String> dadosSemRepeticoes = new HashSet<>(dados);
+                //Iterator<String> iteradorDadosSemRepeticoes = dadosSemRepeticoes.iterator();
+                dados.clear();
+                for ( String item : dadosSemRepeticoes){
+                    dados.add(item);
+                }
+/*                while (iteradorDadosSemRepeticoes.hasNext()) {
+                    dados.add(iteradorDadosSemRepeticoes.next());
+                    Log.d(TAG, "Value is: " + iteradorDadosSemRepeticoes.next());
+                }*/
+                //return dados;
             }
 
             @Override
@@ -161,6 +185,8 @@ public class AutomaticDraw extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+
+
         return dados;
     }
 
@@ -172,8 +198,7 @@ public class AutomaticDraw extends AppCompatActivity {
         //Inicia firebase
         FirebaseApp.initializeApp(this);
 
-        //Inicia os arraylist com os dados
-        love = listAllData("love");
+
 
 
         class VennView extends View {
@@ -349,36 +374,49 @@ public class AutomaticDraw extends AppCompatActivity {
 
                         if (cum == true && c2 == false && c3 == false && c4 == false) {
                             circulodavez = 1;
-                            white(getString(R.string.t_love) + "?", 1);
+                            //Inicia os arraylist com os dados
+                            love = listAllData("love");
+                            white(getString(R.string.t_love) + "?", 1,love);
                         }
                         if (c2 == true && cum == false && c3 == false && c4 == false) {
                             circulodavez = 2;
-                            white(getString(R.string.t_good) + " " + getString(R.string.good) + "?", 2);
+                            good = listAllData("good_at");
+                            white(getString(R.string.t_good) + " " + getString(R.string.good) + "?", 2,good);
                         }
                         if (c3 == true && c2 == false && cum == false && c4 == false) {
                             circulodavez = 3;
-                            white(getString(R.string.t_need) + " " + getString(R.string.need) + "?", 3);
+                            need = listAllData("need");
+                            white(getString(R.string.t_need) + " " + getString(R.string.need) + "?", 3,need);
                         }
 
                         if (c4 == true && c2 == false && c3 == false && cum == false) {
                             circulodavez = 4;
-                            white(getString(R.string.t_paid) + " " + getString(R.string.paid) + "?", 4);
+                            paid = listAllData("paid_for");
+                            white(getString(R.string.t_paid) + " " + getString(R.string.paid) + "?", 4,paid);
                         }
 
                         if (cum == true && c2 == true && c3 == false && c4 == false) {
-                            white("Your " + getString(R.string.passion), 5);
+
+                            pas = listAllData("passion");
+
+                            white("Your " + getString(R.string.passion), 5,pas);
                         }
 
                         if (cum == true && c2 == false && c3 == true && c4 == false) {
-                            white("Your " + getString(R.string.mission), 6);
+                            mis = listAllData("mission");
+
+                            white("Your " + getString(R.string.mission), 6,mis);
                         }
 
                         if (c1 == false && c2 == true && c3 == false && c4 == true) {
-                            white("Your " + getString(R.string.profession), 7);
+                            prof = listAllData("profession");
+
+                            white("Your " + getString(R.string.profession), 7,prof);
                         }
 
                         if (c1 == false && c2 == false && c3 == true && c4 == true) {
-                            white("Your " + getString(R.string.vocation), 8);
+                            voca = listAllData("vocation");
+                            white("Your " + getString(R.string.vocation), 8,voca);
                         }
 
                         update(c);
