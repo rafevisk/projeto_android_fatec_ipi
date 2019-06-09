@@ -4,33 +4,31 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Random;
 
 public class AutomaticDraw extends AppCompatActivity {
-
+    final String TAG = "Teste";
     int colorc1 = setColorPaint();
     int colorc2 = setColorPaint();
     int colorc3 = setColorPaint();
@@ -64,7 +62,7 @@ public class AutomaticDraw extends AppCompatActivity {
         input = new EditText(this);
         builder.setView(input);
 
-        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
                 String txt = input.getText().toString();
@@ -72,6 +70,7 @@ public class AutomaticDraw extends AppCompatActivity {
                     if (circulo == 1) {
                         q1 = txt;
                         addData("love",q1);
+                        listAllData("love");
                     }
                     if (circulo == 2) {
                         q2 = txt;
@@ -102,12 +101,12 @@ public class AutomaticDraw extends AppCompatActivity {
                         addData("vocation",vocation);
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "Please, make sure you've write something", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.messagem_warning, Toast.LENGTH_SHORT).show();
                 }
 
             }
 
-        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
                 dialogInterface.dismiss();
@@ -117,14 +116,41 @@ public class AutomaticDraw extends AppCompatActivity {
         AlertDialog ad = builder.create();
         ad.show();
     }
+
     //Save data on FireBase
     public void addData(String nameCircle, String txt){
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
-
         myRef.child(nameCircle).push().setValue(txt);
+
     }
+
+    //Search data on FireBase
+    public void listAllData(String nameCircle){
+        // Write a message to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference(nameCircle);
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Read all child
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    String value = child.getValue(String.class);
+                    Log.d(TAG, "Value is: " + value);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,12 +222,10 @@ public class AutomaticDraw extends AppCompatActivity {
                 paint.setXfermode(new PorterDuffXfermode(mode));
 
                 Resources res = getResources();
-                Bitmap bitmap = BitmapFactory.decodeResource(res, R.drawable.ic_launcher_background);
 
                 //1
                 paint.setColor(colorc1);//t
                 c.drawCircle(cx, cy - r - 10, expand * r, paint);
-
 
                 paint.setColor(colorc2);
                 c.drawCircle(cx - tx, cy + ty - 20, expand * r, paint);
@@ -222,25 +246,26 @@ public class AutomaticDraw extends AppCompatActivity {
                 paint.setTextSize(80);
                 c.drawText("Ikigai", cx - tx + 42, 52 * h / 100, paint);
 
+
                 paint.setTextSize(25);
-                c.drawText("Whats you Love ", cx - tx + 40, cy - tx * 2 - 20, paint);
-                c.drawText(" LOVE ", cx - tx + 110, cy - tx * 2 + 30, paint);
 
-                c.drawText("what you are", cx / 14, cy + ty - 40, paint);
-                c.drawText(" GOOD AT", cx / 14, cy + ty - 10, paint);
+                c.drawText(getString(R.string.t_love), cx - tx + 40, cy - tx * 2 - 20, paint);
+                c.drawText(getString(R.string.love), cx - tx + 110, cy - tx * 2 + 30, paint);
 
-                c.drawText("what the world", cx + tx + 30, cy + ty - 30, paint);
-                c.drawText(" NEED", cx + tx + 84, cy + ty, paint);
+                c.drawText(getString(R.string.t_good), cx / 14, cy + ty - 40, paint);
+                c.drawText(getString(R.string.good), cx / 14, cy + ty - 10, paint);
 
-                c.drawText("Whats you can be", cx - tx + 25, cy + ty * 7, paint);
-                c.drawText(" PAID FOR ", cx - tx + 75, cy + ty * 8, paint);
+                c.drawText(getString(R.string.t_need), cx + tx + 30, cy + ty - 30, paint);
+                c.drawText(getString(R.string.need), cx + tx + 84, cy + ty, paint);
+
+                c.drawText(getString(R.string.t_paid), cx - tx + 25, cy + ty * 7, paint);
+                c.drawText(getString(R.string.paid), cx - tx + 75, cy + ty * 8, paint);
 
                 paint.setTextSize(24);
-                c.drawText("PASSION ", cx - tx - 30, cy - tx + 20, paint);
-                c.drawText("MISSION ", cx + tx - 60, cy - tx + 20, paint);
-                c.drawText("PROFESSION ", cx - tx - 70, cy + tx - 20, paint);
-                c.drawText("VOCATION ", cx + tx - 60, cy + tx - 20, paint);
-
+                c.drawText(getString(R.string.passion), cx - tx - 30, cy - tx + 20, paint);
+                c.drawText(getString(R.string.mission), cx + tx - 60, cy - tx + 20, paint);
+                c.drawText(getString(R.string.profession), cx - tx - 70, cy + tx - 20, paint);
+                c.drawText(getString(R.string.vocation), cx + tx - 60, cy + tx - 20, paint);
 
                 if (redesenhar == true) {
                     update(c);
@@ -307,36 +332,36 @@ public class AutomaticDraw extends AppCompatActivity {
 
                         if (cum == true && c2 == false && c3 == false && c4 == false) {
                             circulodavez = 1;
-                            white("Whats you Love ?", 1);
+                            white(getString(R.string.t_love) + "?", 1);
                         }
                         if (c2 == true && cum == false && c3 == false && c4 == false) {
                             circulodavez = 2;
-                            white("Whats you are Good At ?", 2);
+                            white(getString(R.string.t_good) + " " + getString(R.string.good) + "?", 2);
                         }
                         if (c3 == true && c2 == false && cum == false && c4 == false) {
                             circulodavez = 3;
-                            white("Whats you World Need ?", 3);
+                            white(getString(R.string.t_need) + " " + getString(R.string.need) + "?", 3);
                         }
 
                         if (c4 == true && c2 == false && c3 == false && cum == false) {
                             circulodavez = 4;
-                            white("Whats you Can Be Paid For ?", 4);
+                            white(getString(R.string.t_paid) + " " + getString(R.string.paid) + "?", 4);
                         }
 
                         if (cum == true && c2 == true && c3 == false && c4 == false) {
-                            white("Your Passion", 5);
+                            white("Your " + getString(R.string.passion), 5);
                         }
 
                         if (cum == true && c2 == false && c3 == true && c4 == false) {
-                            white("Your Mission", 6);
+                            white("Your " + getString(R.string.mission), 6);
                         }
 
                         if (c1 == false && c2 == true && c3 == false && c4 == true) {
-                            white("Your Profession", 7);
+                            white("Your " + getString(R.string.profession), 7);
                         }
 
                         if (c1 == false && c2 == false && c3 == true && c4 == true) {
-                            white("Your Vocation", 8);
+                            white("Your " + getString(R.string.vocation), 8);
                         }
 
                         update(c);

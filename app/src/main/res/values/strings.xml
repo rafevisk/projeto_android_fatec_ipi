@@ -31,5 +31,22 @@
     <string name="title_line_width_dialog">Choose Line Width</string>
     <string name="title_manual">Manual draw</string>
     <string name="title_auto">Automatic draw</string>
+    <string name="save">Save</string>
+    <string name="messagem_warning">Please make sure you write something</string>
+    <string name="cancel">Cancel</string>
+    <string name="t_love">What you Love  </string>
+    <string name="love">Love</string>
+    <string name="t_good">What you are </string>
+    <string name="good">GOOD AT</string>
+    <string name="t_need">What the world </string>
+    <string name="need">NEED</string>
+    <string name="t_paid">Whereby you can be </string>
+    <string name="paid">PAID FOR</string>
+    <string name="passion">PASSION</string>
+    <string name="mission">MISSION</string>
+    <string name="profession">PROFESSION</string>
+    <string name="vocation">VOCATION</string>
+    <string name="question_love">What you love ?</string>
+    <string name="question_good">What you are good at ?</string>
 
 </resources>
