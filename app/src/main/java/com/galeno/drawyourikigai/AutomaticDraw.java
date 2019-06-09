@@ -15,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class AutomaticDraw extends AppCompatActivity {
@@ -46,21 +49,28 @@ public class AutomaticDraw extends AppCompatActivity {
     String profession = "";
     String vocation = "";
 
+    ArrayList<String> love;
+
     Bitmap tempBmp = Bitmap.createBitmap(1, 1, Bitmap.Config.RGB_565);
     Canvas c = new Canvas();
     Paint paint = new Paint();
 
     boolean redesenhar = false;
+    AutoCompleteTextView input;
 
-    EditText input;
+    //EditText input;
 
     public void white(final String pergunta, final int circulo) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(pergunta);
 
-        input = new EditText(this);
+        input = new AutoCompleteTextView(this);
         builder.setView(input);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                (this, android.R.layout.select_dialog_item, love);
+        input.setThreshold(1); //will start working from first character
+        input.setAdapter(adapter);
 
         builder.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
             @Override
@@ -127,10 +137,12 @@ public class AutomaticDraw extends AppCompatActivity {
     }
 
     //Search data on FireBase
-    public void listAllData(String nameCircle){
+    public ArrayList<String> listAllData(String nameCircle){
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(nameCircle);
+
+        ArrayList<String> dados = new ArrayList<String>();
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -138,7 +150,8 @@ public class AutomaticDraw extends AppCompatActivity {
                 // Read all child
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     String value = child.getValue(String.class);
-                    Log.d(TAG, "Value is: " + value);
+                    dados.add(value);
+                    //Log.d(TAG, "Value is: " + value);
                 }
             }
 
@@ -148,7 +161,7 @@ public class AutomaticDraw extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-
+        return dados;
     }
 
 
@@ -156,8 +169,12 @@ public class AutomaticDraw extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //Inicia firebase
         FirebaseApp.initializeApp(this);
+
+        //Inicia os arraylist com os dados
+        love = listAllData("love");
+
 
         class VennView extends View {
             public VennView(Context context) {
